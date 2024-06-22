@@ -71,12 +71,12 @@ async function handleRequest(request) {
       if (MODE == "debug") {
         headers.set(
           "Www-Authenticate",
-          `Bearer realm="http://${url.host}/v2/auth",service="docker"`
+          `Bearer realm="http://${url.host}/v2/auth",service="cloudflare-docker-proxy"`
         );
       } else {
         headers.set(
           "Www-Authenticate",
-          `Bearer realm="https://${url.hostname}/v2/auth",service="docker"`
+          `Bearer realm="https://${url.hostname}/v2/auth",service="cloudflare-docker-proxy"`
         );
       }
       return new Response(JSON.stringify({ message: "UNAUTHORIZED" }), {
