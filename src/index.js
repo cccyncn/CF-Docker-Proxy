@@ -5,6 +5,19 @@ addEventListener("fetch", (event) => {
 
 const dockerHub = "https://registry-1.docker.io";
 
+import DOCS from './help.html'
+ 
+// return docs
+if (url.pathname === "/") {
+  return new Response(DOCS, {
+    status: 200,
+    headers: {
+      "content-type": "text/html"
+    }
+  });
+}
+
+
 const routes = {
   // production
   "docker.cccyn.win": dockerHub,
@@ -16,7 +29,7 @@ const routes = {
   "cloudsmith.cccyn.win": "https://docker.cloudsmith.io",
 
   // staging
-  "docker-staging.cccyn.win": dockerHub,
+  "docker-staging.libcuda.so": dockerHub,
 };
 
 function routeByHosts(host) {
@@ -151,16 +164,4 @@ async function fetchToken(wwwAuthenticate, scope, authorization) {
     headers.set("Authorization", authorization);
   }
   return await fetch(url, { method: "GET", headers: headers });
-}
-
-import DOCS from './help.html'
- 
-// return docs
-if (url.pathname === "/") {
-  return new Response(DOCS, {
-    status: 200,
-    headers: {
-      "content-type": "text/html"
-    }
-  });
 }
